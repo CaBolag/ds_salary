@@ -54,12 +54,17 @@ def get_jobs(keyword, num_jobs, verbose):
                 # When the number of jobs collected has reached the number we set. 
                 break
             job_button.click()  
+# =============================================================================
+#             time.sleep(5)
+#             driver.find_element_by_xpath('//*[@id="JobDescriptionContainer"]/div[2]/span').click()
+# =============================================================================
             time.sleep(1)
             collected_successfully = False
             
             while not collected_successfully:
                 try:
                     time.sleep(1)
+                    driver.find_element_by_xpath('//*[@id="JobDescriptionContainer"]/div[2]/span').click()
                     company_name = driver.find_element_by_xpath('//*[@id="JDCol"]/div/article/div/div[1]/div/div/div[1]/div[3]/div[1]/div[1]').text
                     location = driver.find_element_by_xpath('//*[@id="JDCol"]/div/article/div/div[1]/div/div/div[1]/div[3]/div[1]/div[3]').text
                     job_title = driver.find_element_by_xpath('//*[@id="JDCol"]/div/article/div/div[1]/div/div/div[1]/div[3]/div[1]/div[2]').text

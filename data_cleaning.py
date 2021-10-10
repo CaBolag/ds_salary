@@ -18,10 +18,6 @@ df=df[df['Salary Estimate']!='-1']
 salary=df['Salary Estimate'].apply(lambda x: x.split('(')[0])
 minus_Kd=salary.apply(lambda x: x.replace('K','').replace('$',''))
 min_hr=minus_Kd.apply(lambda x: x.lower().replace('per hour','').replace('employer provided salary:',''))
-# =============================================================================
-# df['Salary Estimate']=df['Salary Estimate'].apply(lambda x: x if '-' in x else -1)
-# minus_without_max=min_hr.apply(lambda x: x if '-' in x else -1)
-# =============================================================================
 
 df['min_salary']=min_hr.apply(lambda x: int(x.split('-')[0]))
 df['max_salary']=min_hr.apply(lambda x: int(x.split('-')[1]))
@@ -34,16 +30,13 @@ df['company_txt']=df.apply(lambda x:x['Company Name'] if x['Rating']<0 else x['C
 df['job_state']=df['Location'].apply(lambda x: x.split(',')[1] if x!='Remote' else x)
 #df['same_state']=df.apply(lambda x: 1 if x.Location==x.He)
 
-#age of company
-df=df[df['Founded']!='Company - Private']
-df=df[df['Founded']!='Government']
-df['age'] = df.Founded.apply(lambda x: x if int(x) <1 else 2021 - int(x))
+df['age'] = df.Founded.apply(lambda x: int(-1) if x in('-1','Company - Private','Company - Public','Government') else 2021 - int(x))
 
 #parsing of job description(python,etc.)
 
 #python
 df['python_yn'] = df['Job Description'].apply(lambda x: 1 if 'python' in x.lower() else 0)
- 
+df.python_yn.value_counts()
 #r studio 
 df['R_yn'] = df['Job Description'].apply(lambda x: 1 if 'r studio' in x.lower() or 'r-studio' in x.lower() else 0)
 df.R_yn.value_counts()
