@@ -40,7 +40,7 @@ def get_jobs(keyword, num_jobs, verbose):
     
     # Clicking on the "Search" button to search for the job postings based on keywords entered. 
     driver.find_element_by_xpath('//*[@id="scBar"]/div/button/span').click()
-    time.sleep(5)
+    time.sleep(3)
     
 
     while len(jobs) < num_jobs:
@@ -71,7 +71,7 @@ def get_jobs(keyword, num_jobs, verbose):
                     job_description = driver.find_element_by_xpath('//div[@class="jobDescriptionContent desc"]').text
                     collected_successfully = True
                 except:
-                    time.sleep(1)
+                    #time.sleep(1)
                     collected_successfully = True
             try:
                 salary_estimate = driver.find_element_by_xpath('//*[@id="JDCol"]/div/article/div/div[1]/div/div/div[1]/div[3]/div[1]/div[4]/span').text
