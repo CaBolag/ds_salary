@@ -4,5 +4,7 @@ if __name__ == '__main__':
     import pandas as pd
 
     #path = "D:|DS|projects|ds_salary|chromedriver"
-    df = gs.get_jobs('data scientist', 100, False)
+    df = gs.get_jobs('data scientist', 2000, False)
     df.to_csv('glassdoor_jobs.csv',index=False)
+    
+
